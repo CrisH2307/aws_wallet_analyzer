@@ -9,13 +9,20 @@ const WalletAnalyzer: React.FC = function(){
 
     const fetchTransactions = async function(address: string){
         try {
-            // Change later
-            const response = await axios.get(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=YourApiKeyToken`);
-            setTransactions(response.data.result);
+            const response = await axios.get(`https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=bbrfq1yfd3tueh2gyh2yopbo-2mber8ylzcda_wvdj8qhxfq`);
+            const res = response.data.result;
+            if (Array.isArray(res)){
+                setTransactions(res);
+            } else {
+                setTransactions([]);
+            }
         } catch (error) {
-            console.error('Error fetching transactions:', error);
+            setTransactions([]);
         } 
     }
+    
+    
+    
 
     const analyzeTransactions = useCallback(function(){
         const analysisResult = { totalTransactions: transactions.length };
@@ -24,13 +31,14 @@ const WalletAnalyzer: React.FC = function(){
 
     useEffect(() => {
         if (transactions.length > 0) {
-            analyzeTransactions()
+            analyzeTransactions();
         }
     }, [transactions, analyzeTransactions]);
 
     const handleAnalyze = async function() {
-        await fetchTransactions(walletAddress)
+        await fetchTransactions(walletAddress);
     } 
+    
 
     return(
         <div className='p-4'>
