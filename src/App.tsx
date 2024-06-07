@@ -1,6 +1,6 @@
 import "./App.css";
 import DomainResolver from "./components/DomainResolver";
-import Footer from "./components/Footer";
+//import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import WalletAnalyzer from "./components/WalletAnalyzer";
 
@@ -11,7 +11,7 @@ const App : React.FC = function(){
       <h1 className="font-bold text-3xl">Blockchain Wallet Analyzer</h1>
       <DomainResolver />
       <WalletAnalyzer />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
